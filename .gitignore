@@ -1,0 +1,25 @@
+# .NET
+bin/
+obj/
+
+# SQLite temporary files
+*.db-shm
+*.db-wal
+
+# React / Node
+node_modules/
+dist/
+
+# Environment files
+.env
+.env.local
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
