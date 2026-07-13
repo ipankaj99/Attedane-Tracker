@@ -61,30 +61,30 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 // Apply migrations and seed HR account
-// using (var scope = app.Services.CreateScope())
-// {
-//     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-//     // Apply pending migrations
-//     db.Database.Migrate();
+    // Apply pending migrations
+    db.Database.Migrate();
 
-//     // Seed HR user if not exists
-//     if (!db.Users.Any(u => u.Email == "hr@company.com"))
-//     {
-//         db.Users.Add(new User
-//         {
-//             Name = "HR Admin",
-//             Email = "hr@company.com",
-//             PasswordHash = BCrypt.Net.BCrypt.HashPassword("Admin123"),
-//             Role = "Hr",
-//             SickLeave = 10,
-//             EarnedLeave = 5,
-//             CasualLeave = 5
-//         });
+    // Seed HR user if not exists
+    if (!db.Users.Any(u => u.Email == "hr@company.com"))
+    {
+        db.Users.Add(new User
+        {
+            Name = "HR Admin",
+            Email = "hr@company.com",
+            PasswordHash = BCrypt.Net.BCrypt.HashPassword("Admin123"),
+            Role = "Hr",
+            SickLeave = 10,
+            EarnedLeave = 5,
+            CasualLeave = 5
+        });
 
-//         db.SaveChanges();
-//     }
-// }
+        db.SaveChanges();
+    }
+}
 
 // Middleware
 app.UseCors("AllowAll");

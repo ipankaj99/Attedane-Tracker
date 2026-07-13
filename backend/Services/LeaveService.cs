@@ -30,15 +30,8 @@ namespace Backend.Services
             // 2. Get the user
             var user = _db.Users.Find(request.UserId);
             if (user == null) return "User not found.";
-
-            // 3. Use the TotalDays property that you are now populating from the DTO
-            // This value handles the logic (full days or half-day deductions)
             double requestedDays = request.TotalDays;
-
-            // 4. Perform the balance check using 'double' instead of 'int'
             bool success = false;
-
-            // Ensure your User model properties (SickLeave, etc.) are type 'double'
             if (request.LeaveType == "Sick" && user.SickLeave >= requestedDays)
             {
                 user.SickLeave -= requestedDays;
@@ -57,10 +50,9 @@ namespace Backend.Services
 
             if (!success) return "Not enough leave balance.";
 
-            // 5. Finalize the request with your new fields
+//default pending
             request.Status = "Pending";
 
-            // Ensure _db.LeaveRequests.Add is saving all new properties (IsHalfDay, Session, TotalDays)
             _db.LeaveRequests.Add(request);
 
             // Mark user as modified so EF Core tracks the balance change
@@ -78,7 +70,7 @@ namespace Backend.Services
                 .OrderByDescending(l => l.Id)
                 .ToList();
 
-            // 2. Map everything, including the new fields
+            // 2. Map everything
             return requests.Select(req => new LeaveResponseDto
             {
                 Id = req.Id,
@@ -88,7 +80,7 @@ namespace Backend.Services
                 EndDate = req.EndDate,
                 Reason = req.Reason,
                 Status = req.Status,
-                // --- Add these missing fields ---
+          
                 TotalDays = req.TotalDays,
                 IsHalfDay = req.IsHalfDay,
                 Session = req.Session
@@ -107,14 +99,12 @@ namespace Backend.Services
             var leave = _db.LeaveRequests.Find(id);
             if (leave == null) return "Request not found.";
 
-            // 1. Check if status is already processed
             if (leave.Status != "Pending") return "Request already processed.";
 
             var user = _db.Users.Find(leave.UserId);
             if (user == null) return "User associated with request not found.";
 
-            // 2. IMPORTANT: Use the stored TotalDays instead of recalculating
-            // This correctly handles full days, half-days, or any partial day.
+
             double durationToRefund = leave.TotalDays;
 
             if (status == "Rejected")
@@ -128,11 +118,11 @@ namespace Backend.Services
                     user.EarnedLeave += durationToRefund;
             }
 
-            // 3. Update status and save the manager ID
+           
             leave.Status = status;
             leave.ApprovedBy = managerId;
 
-            // Mark as modified to ensure EF Core tracks the balance change
+            
             _db.Entry(user).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
 
             _db.SaveChanges();

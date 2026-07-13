@@ -1,7 +1,7 @@
 import { useEffect, useContext, useState } from 'react';
 import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom';
 import { LayoutDashboard, CalendarPlus, UserPlus, ClipboardCheck, LogOut, Menu, X } from 'lucide-react';
-import { UserContext } from '../context/UserContext';
+
 
 import { AuthContext } from '../context/AuthContext';
 

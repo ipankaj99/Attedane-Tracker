@@ -89,7 +89,7 @@ namespace Backend.Controllers
         [HttpGet("profile")]
         public IActionResult GetProfile()
         {
-            // Extract UserId from the JWT token
+            // Extract UserId from the JWt
             var claim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (claim == null || !int.TryParse(claim, out int userId))
                 return Unauthorized(new { Message = "Invalid token" });
@@ -97,7 +97,7 @@ namespace Backend.Controllers
             var user = _userService.GetUserById(userId);
             if (user == null) return NotFound(new { Message = "User not found" });
 
-            // Return the user data (Note: We don't return the PasswordHash for security!)
+            //return user
             return Ok(new
             {
                 user.Id,
@@ -132,7 +132,7 @@ namespace Backend.Controllers
             {
                 return BadRequest(new { Message = "Email already exists" });
             }
-            // Map the incoming DTO to your actual database Model
+            // Map the incoming DTO to  db model
             string passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password, 12);
             if (request.Role == "Employee")
             {

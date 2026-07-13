@@ -46,14 +46,17 @@ Bash
 cd server
 dotnet restore
 # Run migrations to initialize SQLite database
-dotnet ef database update
-dotnet run
-Frontend Setup (React)
+1) dotnet ef database update
+2) dotnet run
 
+
+#Frontend Setup (React)
 Bash
 cd client
 npm install
 npm run dev
+
+
 📋 Administrative Logic
 The application follows a "Controlled Onboarding" pattern. When the system is initialized via the seed script, a master HR account is created. Only this account has the authority to:
 

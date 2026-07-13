@@ -10,8 +10,7 @@ namespace Backend.DTO
         public DateTime EndDate { get; set; }
         public string? Reason { get; set; }
         public string? Status { get; set; }
-        
-        // --- Add these to display the new logic ---
+    
         public double TotalDays { get; set; }
         public bool IsHalfDay { get; set; }
         public string? Session { get; set; } // "Morning", "Evening", or ""

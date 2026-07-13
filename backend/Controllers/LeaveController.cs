@@ -36,7 +36,7 @@ namespace Backend.Controllers
             var userId = GetUserId();
             if (userId == null) return Unauthorized(new { Message = "Invalid user token." });
 
-            // 1. Calculate the days on the SERVER to ensure security
+           
             double calculatedDays = (request.EndDate.Date - request.StartDate.Date).Days + 1.0;
             if (request.IsHalfDay)
             {
@@ -44,7 +44,7 @@ namespace Backend.Controllers
             }
             Console.WriteLine("calculatedDays in controller is" + calculatedDays);
 
-            // 2. Map only the data the user IS allowed to provide
+            
             var leaveRequest = new LeaveRequest
             {
                 UserId = userId.Value,
@@ -54,7 +54,7 @@ namespace Backend.Controllers
                 Reason = request.Reason,
                 IsHalfDay = request.IsHalfDay,
                 Session = request.Session,
-                TotalDays = calculatedDays, // Use the server-calculated value!
+                TotalDays = calculatedDays,
                 Status = "Pending"
             };
 
@@ -71,7 +71,7 @@ namespace Backend.Controllers
         {
             var role = User.FindFirst(ClaimTypes.Role)?.Value;
 
-            // Allow access only if role is Manager OR HR
+            // Allow only if role is Manager OR HR
             if (role != "Manager" && role != "Hr")
             {
                 return Forbid();

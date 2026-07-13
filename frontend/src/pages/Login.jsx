@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { Mail, Lock } from 'lucide-react';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import { UserContext } from '../context/UserContext';
+
 
 export default function Login() {
   const [email, setEmail] = useState('');
