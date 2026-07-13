@@ -20,41 +20,41 @@ namespace Backend.Controllers
             _jwtService = jwtService;
         }
 
-        [HttpPost("register")]
-        public IActionResult Register([FromBody] RegisterDto request) // Using RegisterDto here
-        {
-            // Check if email already exists
-            if (_userService.GetUserByEmail(request.Email) != null)
-            {
-                return BadRequest(new { Message = "Email already exists" });
-            }
-            // Map the incoming DTO to your actual database Model
-            string passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password, 12);
-            var newUser = new User
-            {
-                Name = request.Name,
-                Email = request.Email,
-                PasswordHash = passwordHash
-            };
+        // [HttpPost("register")]
+        // public IActionResult Register([FromBody] RegisterDto request) // Using RegisterDto here
+        // {
+        //     // Check if email already exists
+        //     if (_userService.GetUserByEmail(request.Email) != null)
+        //     {
+        //         return BadRequest(new { Message = "Email already exists" });
+        //     }
+        //     // Map the incoming DTO to your actual database Model
+        //     string passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password, 12);
+        //     var newUser = new User
+        //     {
+        //         Name = request.Name,
+        //         Email = request.Email,
+        //         PasswordHash = passwordHash
+        //     };
 
-            _userService.RegisterUser(newUser);
-            var token = _jwtService.GenerateToken(newUser);
+        //     _userService.RegisterUser(newUser);
+        //     var token = _jwtService.GenerateToken(newUser);
 
-            return Ok(new
-            {
-                Token = token,
-                User = new
-                {
-                    newUser.Id,
-                    newUser.Name,
-                    newUser.Email,
-                    newUser.Role,
-                    newUser.SickLeave,
-                    newUser.EarnedLeave,
-                    newUser.CasualLeave
-                }
-            });
-        }
+        //     return Ok(new
+        //     {
+        //         Token = token,
+        //         User = new
+        //         {
+        //             newUser.Id,
+        //             newUser.Name,
+        //             newUser.Email,
+        //             newUser.Role,
+        //             newUser.SickLeave,
+        //             newUser.EarnedLeave,
+        //             newUser.CasualLeave
+        //         }
+        //     });
+        // }
 
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginDto request) // Using LoginDto here

@@ -1,16 +1,16 @@
 using System.ComponentModel.DataAnnotations;
 namespace Backend.DTO
 {
-    public class RegisterDto
-    {
-        [Required]
-        public string Name { get; set; } = string.Empty;
-        [Required]
-        public string Email { get; set; } = string.Empty;
-        [Required]
-        [StringLength(14, MinimumLength =6)]
-        public string Password { get; set; } = string.Empty;
-    }
+    // public class RegisterDto
+    // {
+    //     [Required]
+    //     public string Name { get; set; } = string.Empty;
+    //     [Required]
+    //     public string Email { get; set; } = string.Empty;
+    //     [Required]
+    //     [StringLength(14, MinimumLength =6)]
+    //     public string Password { get; set; } = string.Empty;
+    // }
     public class RegisterDtoHr
     {
         [Required]
