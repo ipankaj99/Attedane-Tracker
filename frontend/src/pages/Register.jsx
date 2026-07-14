@@ -30,7 +30,7 @@ export default function Register() {
         setIsAuthenticated(true);
         navigate('/dashboard');
       } else {
-        setError(data.message || 'Registration failed');
+        setError(data.message || 'Registration failed or may be password length not ');
       }
     } catch (err) {
       setError('Cannot connect to server. Is the backend running?');

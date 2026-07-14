@@ -84,3 +84,70 @@ Hierarchy Management: A drag-and-drop or simple dropdown interface to reassign a
 Global View: A filterable table of all employees, their attendance trends, and pending requests.
 
 Record Correction: An "Edit" mode to override or correct erroneous leave requests submitted by employees.
+
+
+Step-by-Step Execution Guide
+
+1. Initial System Initialization
+
+Before you can log in, the database must be seeded with the master HR account.
+
+Navigate to the server directory:
+
+bash cd server
+
+Run database migrations:
+
+bash dotnet ef database update
+
+Launch the API:
+
+bash dotnet run
+
+
+Note: On the first run, the system executes the seed script, creating the master HR account. Refer to your SeedData.cs (or equivalent file) for the default credentials, e.g.:
+
+Email:  hr@company.com
+Password: Admin123!
+
+
+
+
+2. HR Administrator Access
+
+Once the backend is running, access the platform as the Administrator to begin operations.
+
+Start the frontend:
+
+bashcd ../client
+npm run dev
+
+Login:
+Navigate to the login page in your browser and sign in using the master HR credentials.
+
+
+3. Managing Users and Hierarchy
+
+The system follows a "Controlled Onboarding" pattern — all new users must be created by the HR account.
+
+Onboard New Employees
+
+Navigate to the HR Dashboard → select "Add New User."
+
+Assign Reporting Structure
+
+During the user creation form, use the Manager Selection dropdown:
+
+
+If you select a specific manager → all attendance requests (leaves/queries) from this new user are routed to that manager.
+Default behavior → if the Manager field is left empty/unassigned, the system defaults the reporting line to the HR Administrator.
+
+
+Credential Handoff
+
+Once the account is saved in the database, communicate the generated credentials to the employee so they can perform their initial login.
+
+
+💡 Workflow Summary
+
+ActionPerformed ByPurposeDatabase MigrationSystem / DevInitialize tables and seed Master HR.System LoginHR AdminUnlock user management capabilities.Create UserHR AdminRegister employee and map their manager.Attendance / LeaveEmployeeRequest leave; routes to assigned manager.Approval / RejectionManager / HRManage pending employee requests.
