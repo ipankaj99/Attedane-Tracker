@@ -25,18 +25,15 @@ namespace Backend.Models
 
         public string Status { get; set; } = string.Empty;
 
-        // --- New Fields for Half-Day & Calculation Logic ---
         
-        // This stores the final calculated value (e.g., 2.5 or 0.5)
         public double TotalDays { get; set; } 
 
-        // Tracks if the user explicitly clicked the "Half Day" checkbox
         public bool IsHalfDay { get; set; } 
 
-        // Stores "Morning", "Evening", or ""
+       
         public string Session { get; set; } = string.Empty; 
 
-        // ----------------------------------------------------
+     
 
         public int? ApprovedBy { get; set; } 
         [ForeignKey("ApprovedBy")]

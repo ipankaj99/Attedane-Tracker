@@ -15,6 +15,7 @@ export default function LeaveRequests() {
 
   const fetchRequests = async () => {
     const token = localStorage.getItem('token');
+    console.log(token);
     try {
       const response = await fetch('http://localhost:5071/api/Leave/all', {
         headers: { 'Authorization': `Bearer ${token}` }

@@ -50,14 +50,9 @@ namespace Backend.Services
 
             if (!success) return "Not enough leave balance.";
 
-//default pending
             request.Status = "Pending";
-
             _db.LeaveRequests.Add(request);
-
-            // Mark user as modified so EF Core tracks the balance change
-            _db.Entry(user).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-
+            // _db.Entry(user).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             _db.SaveChanges();
             return "Success";
         }
@@ -66,7 +61,7 @@ namespace Backend.Services
             // 1. Fetch requests with their related User data in one query
             var requests = _db.LeaveRequests
                 .Include(l => l.User) // This loads the User object automatically
-                .Where(l => l.User.ManagerId == managerId)
+                .Where(l => l.User!.ManagerId == managerId)
                 .OrderByDescending(l => l.Id)
                 .ToList();
 
@@ -121,9 +116,6 @@ namespace Backend.Services
            
             leave.Status = status;
             leave.ApprovedBy = managerId;
-
-            
-            _db.Entry(user).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
 
             _db.SaveChanges();
             return "Success";

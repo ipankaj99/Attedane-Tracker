@@ -57,7 +57,7 @@ namespace Backend.Controllers
         // }
 
         [HttpPost("login")]
-        public IActionResult Login([FromBody] LoginDto request) // Using LoginDto here
+        public IActionResult Login([FromBody] LoginDto request) 
         {
             var user = _userService.LoginUser(request.Email, request.Password);
 

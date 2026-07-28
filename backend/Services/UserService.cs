@@ -37,11 +37,8 @@ namespace Backend.Services
         {
             Console.WriteLine($"Email entered: {email}");
 
-            // 1. Fetch the user by email
             var user = _db.Users.FirstOrDefault(u => u.Email == email);
-            Console.WriteLine($"User found: {user?.Email}");
 
-            // 2. If user exists, then verify password hash
             if (user != null && BCrypt.Net.BCrypt.Verify(password, user.PasswordHash))
             {
                 return user;

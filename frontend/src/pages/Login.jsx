@@ -18,7 +18,7 @@ export default function Login() {
     setError('');
 
     try {
-      // Make sure this port matches your backend Swagger port (e.g., 5071)
+      
       const response = await fetch('http://localhost:5071/api/Auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

@@ -16,7 +16,6 @@ namespace Backend.DTO
         public bool IsHalfDay { get; set; }
         
         public string Session { get; set; } = string.Empty; // "Morning", "Evening", or ""
-        [Required]
-        public double TotalDays { get; set; }
+        
     }
 }

@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
   });
   const [loading, setLoading] = useState(true);
 
-  // Use useCallback so this can be used in dependency arrays without infinite loops
+   
   const refreshUser = useCallback(async () => {
     const token = localStorage.getItem('token');
     if (!token) return;
@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }) => {
         setLoading(false);
         return;
       }
-      // You can call refreshUser() here to validate and get fresh data in one go
+     
       await refreshUser();
       setIsAuthenticated(true);
       setLoading(false);

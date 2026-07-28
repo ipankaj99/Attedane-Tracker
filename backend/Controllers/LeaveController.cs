@@ -36,6 +36,7 @@ namespace Backend.Controllers
             var userId = GetUserId();
             if (userId == null) return Unauthorized(new { Message = "Invalid user token." });
 
+
            
             double calculatedDays = (request.EndDate.Date - request.StartDate.Date).Days + 1.0;
             if (request.IsHalfDay)
@@ -67,7 +68,7 @@ namespace Backend.Controllers
 
         [HttpGet("all")]
         [Authorize]
-        public IActionResult GetAllLeaves()
+        public IActionResult GetAllLeavesForManager()
         {
             var role = User.FindFirst(ClaimTypes.Role)?.Value;
 

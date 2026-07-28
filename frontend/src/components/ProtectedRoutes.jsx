@@ -4,7 +4,7 @@ import { useContext } from 'react';
 export default function ProtectedRoute() {
   const { isAuthenticated, loading } = useContext(AuthContext);
 
-  if (loading) return <div>Loading...</div>; // Prevent "flicker"
+  if (loading) return <div>Loading...</div>; 
 
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />;
 }

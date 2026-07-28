@@ -59,7 +59,7 @@ export default function RegisterEmployee() {
         setSelectedManager('');
       } else {
         const data = await response.json();
-        setMessage(`❌ Error: ${data.message || 'Registration failed, may be email format or password length error'}`);
+        setMessage(`❌ Error: ${data.message || 'Registration failed, may be email format or email not unique or password length error'}`);
       }
     } catch (err) {
       setMessage('❌ Cannot connect to server.');

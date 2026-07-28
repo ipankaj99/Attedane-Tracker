@@ -49,12 +49,13 @@ builder.Services.AddScoped<LeaveService>();
 // CORS
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll", policy =>
+    options.AddPolicy("ReactApp", policy =>
     {
         policy
-            .AllowAnyOrigin()
+            .WithOrigins("http://localhost:5173")
             .AllowAnyMethod()
-            .AllowAnyHeader();
+            .AllowAnyHeader()
+             .AllowCredentials();
     });
 });
 
@@ -87,7 +88,7 @@ using (var scope = app.Services.CreateScope())
 }
 
 // Middleware
-app.UseCors("AllowAll");
+app.UseCors("ReactApp");
 
 // app.UseHttpsRedirection();
 

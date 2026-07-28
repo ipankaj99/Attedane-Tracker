@@ -34,32 +34,22 @@ export default function ApplyLeave() {
         return;
     }
 
-    // 2. Validate: End date cannot be before start date
+   
     if (end < start) {
         setMessage('❌ End date cannot be before the start date.');
         setApplied(false); // Re-enable button
         return;
     }
 
-    // Calculate difference in days (adding 1 for inclusive range)
-    let calculatedDays = (end - start) / (1000 * 60 * 60 * 24) + 1;
-
-    // 2. Apply half-day deduction if checked
-    if (isHalfDay) {
-      calculatedDays -= 0.5;
-    }
-
     const token = localStorage.getItem('token');
 
-    // 3. Prepare payload matching your updated DTO
     const payload = {
       leaveType,
       startDate,
       endDate,
       reason,
       isHalfDay,
-      session: isHalfDay ? session : "",
-      totalDays: calculatedDays // Send the calculated value to the backend
+      session: isHalfDay ? session : ""
     };
 
     try {
