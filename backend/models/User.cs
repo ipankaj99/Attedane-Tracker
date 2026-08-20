@@ -25,7 +25,7 @@ namespace Backend.Models
         [ForeignKey("ManagerId")]
         public User? Manager { get; set; }
 
-        public double SickLeave { get; set; } =10;
+        public double SickLeave { get; set; } =11;
         public double EarnedLeave { get; set; } =5;
         public double CasualLeave { get; set; }=5;
 
