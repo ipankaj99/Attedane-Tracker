@@ -27,7 +27,7 @@ namespace Backend.Models
 
         public double SickLeave { get; set; } =10;
         public double EarnedLeave { get; set; } =10;
-        public double CasualLeave { get; set; }=10;
+        public double CasualLeave { get; set; }=20;
 
 
     }
